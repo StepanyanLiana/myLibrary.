@@ -21,7 +21,7 @@
     <input name="id" type="hidden" value="<%=book.getId()%>">
     title: <input type="text" name="title" value="<%=book.getTitle()%>"><br>
     description: <input type="text" name="description" value="<%=book.getDescription()%>"><br>
-    price: <input type="email" name="price" value="<%=book.getPrice()%>"><br>
+    price: <input type="text" name="price" value="<%=book.getPrice()%>"><br>
     author: <select name="author_id" >
     <%for (Author author : authorList) {%>
     <option value="<%=book.getAuthor().getId()%>"><%=author.getName()%><%=author.getSurname()%>
