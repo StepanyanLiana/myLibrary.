@@ -90,7 +90,7 @@ public class BookManager {
         }
     }
     public Book getByTitle(String title) {
-        String sql = "Select * from book where title = ?";
+        String sql = "Select * from book where title like ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, title);
             ResultSet resultSet = preparedStatement.executeQuery();

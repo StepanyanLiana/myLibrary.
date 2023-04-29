@@ -13,7 +13,7 @@
 </head>
 <%List<Author> authorList = (List<Author>) request.getAttribute("authors"); %>
 <body>
-<a href="/allAuthors"> Back </a>
+<a href="/allBooks"> Back </a>
 
 <h2>Create books</h2>
 <form action="/createBooks" method="post">

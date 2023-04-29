@@ -12,10 +12,10 @@
     <title>search book</title>
 </head>
 <body>
-<h1>Search Results</h1>
+<h1>Search books</h1>
 <% List<Book> books = (List<Book>) request.getAttribute("searchBook");
 %>
-<a href="/books" >Back</a>
+<a href="/allBooks" >Back</a>
 <table border="1">
   <tr>
     <th>id</th>
@@ -31,11 +31,6 @@
     <td><%= book.getDescription() %></td>
     <td><%= book.getPrice() %></td>
     <td><%= book.getAuthor().getId() %></td>
-  </tr>
-  <% } %>
-  <% if (books.isEmpty()) { %>
-  <tr>
-    <td colspan="5">No books found.</td>
   </tr>
   <% } %>
   </tr>

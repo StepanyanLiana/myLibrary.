@@ -17,7 +17,7 @@
 <form action="/createAuthors" method="post">
     name: <input type="text" name="name"><br>
     surname: <input type="text" name="surname"><br>
-    email: <input type="text" name="email"><br>
+    email: <input type="email" name="email"><br>
     age: <input type="text" name="age"><br>
     <input type="submit" value="create">
 </form>

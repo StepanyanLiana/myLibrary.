@@ -21,7 +21,7 @@ public class SearchBooksServlet extends HttpServlet {
         List<Book> bookList = (List<Book>) bookManager.getByTitle(title);
         if (bookList != null) {
             req.setAttribute("searchBook", bookList);
-            req.getRequestDispatcher("WEB-INF/search.jsp").forward(req, resp);
+            req.getRequestDispatcher("WEB-INF/searchBook.jsp").forward(req, resp);
         }
     }
 }

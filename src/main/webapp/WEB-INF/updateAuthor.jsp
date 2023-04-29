@@ -18,7 +18,7 @@
   <input name="id" type="hidden" value="<%=author.getId()%>">
   name: <input type="text" name="name" value="<%=author.getName()%>"><br>
   surname: <input type="text" name="surname" value="<%=author.getSurname()%>"> <br>
-  email: <input type="text" name="email" value="<%=author.getEmail()%>"> <br>
+  email: <input type="email" name="email" value="<%=author.getEmail()%>"> <br>
   age: <input type="text" name="age" value="<%=author.getAge()%>"> <br>
   <input type="submit" value="update">
 </form>
