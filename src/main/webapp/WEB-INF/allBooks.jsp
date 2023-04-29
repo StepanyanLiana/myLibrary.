@@ -12,8 +12,7 @@
 <head>
     <title>all books</title>
 </head>
-<% List<Author> authors = (List<Author>) request.getAttribute("authors");%>
-<% List<Book> books = (List<Book>) request.getAttribute("book");%>
+<% List<Book> books = (List<Book>) request.getAttribute("books");%>
 <body>
 <a href="/"> Back </a>
 <h1>Books</h1>
@@ -40,9 +39,9 @@
         <td><%=book.getPrice()%></td>
         <td><%=book.getAuthor().getName()%></td>
         <td><a href="/removeBook?id=<%=book.getId()%>">Delete</a>
-            / <a href="updateBoo?id=<%=book.getId()%>">Update</a> </td>
-        <%}%>
+            / <a href="/updateBook?id=<%=book.getId()%>">Update</a> </td>
     </tr>
+    <%}%>
     <%}%>
 </table>
 </body>
