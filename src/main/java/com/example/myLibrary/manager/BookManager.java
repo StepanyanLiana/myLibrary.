@@ -44,17 +44,17 @@ public class BookManager {
     }
 
     public List<Book> getAll() {
-        List<Book> authors = new ArrayList<>();
+        List<Book> books = new ArrayList<>();
         String sql = "Select * from book";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                authors.add(getBookFromResultSet(resultSet));
+                books.add(getBookFromResultSet(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return authors;
+        return books;
     }
 
     private Book getBookFromResultSet(ResultSet resultSet) throws SQLException {
@@ -89,17 +89,19 @@ public class BookManager {
             throw new RuntimeException(e);
         }
     }
-    public Book getByTitle(String title) {
+    public List<Book> getByTitle(String keyword) {
+        List<Book> bookList = new ArrayList<>();
         String sql = "Select * from book where title like ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, title);
+            keyword = "%" + keyword + "%";
+            preparedStatement.setString(1, keyword);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return getBookFromResultSet(resultSet);
+                bookList.add(getBookFromResultSet(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return bookList;
     }
 }

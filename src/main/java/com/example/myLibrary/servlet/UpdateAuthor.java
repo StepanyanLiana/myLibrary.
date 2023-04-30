@@ -28,7 +28,8 @@ public class UpdateAuthor extends HttpServlet {
         String surname = req.getParameter("surname");
         String email = req.getParameter("email");
         int age = Integer.parseInt(req.getParameter("age"));
-        Author author = new Author(id, name, surname,email, age);
+        String profilePic = req.getParameter("profilePic");
+        Author author = new Author(id, name, surname,email, age, profilePic);
         authorManager.update(author);
         resp.sendRedirect("/allAuthors");
 

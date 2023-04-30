@@ -12,13 +12,16 @@
 <head>
     <title>all books</title>
 </head>
-<% List<Book> books = (List<Book>) request.getAttribute("books");%>
+<% List<Book> books = (List<Book>) request.getAttribute("books");
+String keyword = request.getParameter("keyword") == null ||
+        request.getParameter("keyword").equals("null")
+    ? "" : request.getParameter("keyword");
+%>
 <body>
 <a href="/"> Back </a>
 <h1>Books</h1>
-<form action="/searchBooks" method="post">
-   search book <input type="text">
-    <a href="/searchBooks"></a>
+<form action="/allBooks" method="get">
+   search book <input type="text" name="keyword" value="<%=keyword%>">
     <input type="submit"value="search">
 </form>
 <table border="1">

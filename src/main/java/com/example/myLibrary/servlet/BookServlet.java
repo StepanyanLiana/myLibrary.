@@ -17,7 +17,13 @@ public class BookServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Book> all = bookManager.getAll();
+        String keyword = req.getParameter("keyword");
+        List<Book> all = null;
+        if (keyword == null || keyword.equals("")){
+            all = bookManager.getAll();
+        }else {
+            all = bookManager.getByTitle(keyword);
+        }
         req.setAttribute("books", all);
         req.getRequestDispatcher("WEB-INF/allBooks.jsp").forward(req, resp);
     }

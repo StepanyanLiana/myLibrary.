@@ -16,8 +16,15 @@ import java.util.List;
 public class AuthorServlet extends HttpServlet {
     private AuthorManager authorManager = new AuthorManager();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Author> all = authorManager.getAll();
-        req.setAttribute("authors", all);
-        req.getRequestDispatcher("WEB-INF/allAuthors.jsp").forward(req, resp);
+        String keyword = req.getParameter("keyword");
+        List<Author> all = null;
+        if (keyword == null || keyword.equals("")) {
+            all = authorManager.getAll();
+        } else {
+            all = authorManager.search(keyword);
+        }
+            req.setAttribute("authors", all);
+            req.getRequestDispatcher("WEB-INF/allAuthors.jsp").forward(req, resp);
+        }
     }
-}
+

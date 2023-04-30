@@ -15,8 +15,14 @@
 <% List<Author> authors = (List<Author>) request.getAttribute("authors");%>
 <body>
 <a href="/"> Back </a>
+<h2>Authors</h2>
+<form action="/allAuthors" method="get">
+  <input type="text" name="keyword">
+  <input type="submit" value="search">
+</form>
 <table border="1">
   <tr>
+    <th>image</th>
     <th>id</th>
     <th>name</th>
     <th>surname</th>
@@ -28,6 +34,13 @@
   <% if(authors != null && !authors.isEmpty()) {%>
   <% for (Author author : authors) { %>
   <tr>
+    <td>
+      <%if (author.getImage() == null || author.getImage().equalsIgnoreCase("null")){ %>
+      <img src="/img/default_pic.webp" width="100">
+      <%}else {%>
+      <a href="/getImage?picName=<%=author.getImage()%>"><img
+            src="/getImage?picName=<%=author.getImage()%>" width="100"></a></td>
+    <%}%>
     <td><%=author.getId()%></td>
     <td><%=author.getName()%></td>
     <td><%=author.getSurname()%></td>

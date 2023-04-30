@@ -14,11 +14,12 @@
 <a href="/allAuthors"> Back </a>
 
 <h2>Create authors</h2>
-<form action="/createAuthors" method="post">
+<form action="/createAuthors" method="post" enctype="multipart/form-data">
     name: <input type="text" name="name"><br>
     surname: <input type="text" name="surname"><br>
     email: <input type="email" name="email"><br>
     age: <input type="text" name="age"><br>
+    image: <input type="file" name="profilePic" value="chooseImage"><br>
     <input type="submit" value="create">
 </form>
 </body>
