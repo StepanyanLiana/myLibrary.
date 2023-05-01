@@ -12,13 +12,14 @@ public class BookManager {
     private Connection connection = DBConnectProvider.getInstance().getConnection();
     AuthorManager authorManager = new AuthorManager();
     public void save(Book book) {
-        String sql = "INSERT INTO book(title,description,price,author_id) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO book(title,description,price,author_id,pic_name) VALUES(?,?,?,?,?)";
 
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getDescription());
             ps.setInt(3, book.getPrice());
             ps.setInt(4, book.getAuthor().getId());
+            ps.setString(5, book.getPicName());
             ps.executeUpdate();
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if(generatedKeys.next()) {
@@ -65,7 +66,8 @@ public class BookManager {
                 .title(resultSet.getString("title"))
                 .description(resultSet.getString("description"))
                 .price(resultSet.getInt("price"))
-                .author(byId)
+                 .author(byId)
+                .PicName(resultSet.getString("pic_name"))
                 .build();
     }
     public void removeById(int bookId) {
@@ -77,13 +79,14 @@ public class BookManager {
         }
     }
     public void update(Book book) {
-        String sql = "UPDATE book SET title = ?, description = ?, price = ?, author_id = ? WHERE id = ?";
+        String sql = "UPDATE book SET title = ?, description = ?, price = ?, author_id = ?, pic_name = ? WHERE id = ?";
         try(PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getDescription());
             ps.setInt(3, book.getPrice());
             ps.setInt(4,book.getAuthor().getId());
             ps.setInt(5,book.getId());
+            ps.setString(6, book.getPicName());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

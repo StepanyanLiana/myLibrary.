@@ -1,6 +1,7 @@
 <%@ page import="com.example.myLibrary.model.Author" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.example.myLibrary.model.User" %><%--
+<%@ page import="com.example.myLibrary.model.User" %>
+<%@ page import="com.example.myLibrary.model.UserType" %><%--
   Created by IntelliJ IDEA.
   User: Admin
   Date: 28.04.2023
@@ -12,7 +13,8 @@
 <head>
     <title>all authors</title>
 </head>
-<% List<Author> authors = (List<Author>) request.getAttribute("authors");%>
+<% List<Author> authors = (List<Author>) request.getAttribute("authors");
+User user = (User) session.getAttribute("user");%>
 <body>
 <a href="/"> Back </a>
 <h2>Authors</h2>
@@ -28,14 +30,15 @@
     <th>surname</th>
     <th>email</th>
     <th>age</th>
+    <%if (user.getUserType() == UserType.ADMIN) { %>
     <th>action</th>
-
+<%}%>
   </tr>
   <% if(authors != null && !authors.isEmpty()) {%>
   <% for (Author author : authors) { %>
   <tr>
     <td>
-      <%if (author.getImage() == null || author.getImage().equalsIgnoreCase("null")){ %>
+      <% if (author.getImage() == null || author.getImage().equalsIgnoreCase("null")){ %>
       <img src="/img/default_pic.webp" width="100">
       <%}else {%>
       <a href="/getImage?picName=<%=author.getImage()%>"><img
@@ -46,10 +49,12 @@
     <td><%=author.getSurname()%></td>
     <td><%=author.getEmail()%></td>
     <td><%=author.getAge()%></td>
+  <%if (user.getUserType() == UserType.ADMIN) {%>
     <td><a href="/removeAuthor?id=<%=author.getId()%>">Delete</a>
       / <a href="updateAuthor?id=<%=author.getId()%>">Update</a> </td>
     <%}%>
   </tr>
+  <%}%>
   <%}%>
 </table>
 </body>

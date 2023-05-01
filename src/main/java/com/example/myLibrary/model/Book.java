@@ -15,4 +15,5 @@ public class Book {
     private String description;
     private int price;
     private Author author;
+    private String PicName;
 }

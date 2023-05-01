@@ -22,7 +22,7 @@ private AuthorManager authorManager = new AuthorManager();
         int id = Integer.parseInt(req.getParameter("id"));
         Author byId = authorManager.getById(id);
         if (byId != null) {
-            if (byId.getImage() != null || !byId.getImage().equalsIgnoreCase("null")) {
+            if (byId.getImage() == null || byId.getImage().equalsIgnoreCase("null")) {
                 File file = new File(SharedConstants.UPLOAD_FOLDER + byId.getImage());
                 if (file.exists()) {
                     file.delete();

@@ -20,6 +20,7 @@
   surname: <input type="text" name="surname" value="<%=author.getSurname()%>"> <br>
   email: <input type="email" name="email" value="<%=author.getEmail()%>"> <br>
   age: <input type="text" name="age" value="<%=author.getAge()%>"> <br>
+  image: <input type="file" name="profilePic" value="<%=author.getImage()%>"> <br>
   <input type="submit" value="update">
 </form>
 </body>

@@ -35,10 +35,13 @@ public class UpdateBook extends HttpServlet {
         String description = req.getParameter("description");
         int price = Integer.parseInt(req.getParameter("price"));
         int authorId = Integer.parseInt(req.getParameter("author_id"));
+        String profilePicture = req.getParameter("profilePic");
         Book book = Book.builder().title(title)
                 .id(id).description(description)
                 .price(price)
-                .author(authorManager.getById(authorId)).build();
+                .author(authorManager.getById(authorId))
+                .PicName(profilePicture)
+                .build();
         bookManager.update(book);
         resp.sendRedirect("/allBooks");
     }

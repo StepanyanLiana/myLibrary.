@@ -16,7 +16,7 @@
 <a href="/allBooks"> Back </a>
 
 <h2>Create books</h2>
-<form action="/createBooks" method="post">
+<form action="/createBooks" method="post" enctype="multipart/form-data">
   title: <input type="text" name="title"><br>
   description: <input type="text" name="description"><br>
   price: <input type="text" name="price"><br>
@@ -25,7 +25,9 @@
     <% for (Author author: authorList) { %>
     <option value="<%=author.getId()%>"><%=author.getName()%> <%=author.getSurname()%></option>
     <% }%>
-  </select>
+  </select><br>
+  image:
+  <input type="file" name="profilePic"> <br>
   <input type="submit" value="create">
 </form>
 </body>

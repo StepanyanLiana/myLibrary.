@@ -12,13 +12,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-@WebServlet("/getImage")
-public class GetImageServlet extends HttpServlet {
+@WebServlet("/getImageBook")
+public class BookGetImageServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String picName = req.getParameter("picName");
         //reads input file from an absolute path
-        File imageFile = new File(SharedConstants.UPLOAD_FOLDER + picName);
+        File imageFile = new File(SharedConstants.IMAGE_PATH + picName);
         if (imageFile.exists()) {
             try(FileInputStream inStream = new FileInputStream(imageFile)) {
 

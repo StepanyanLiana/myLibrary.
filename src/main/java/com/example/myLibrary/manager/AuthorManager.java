@@ -80,13 +80,14 @@ public class AuthorManager {
     }
 
     public void update(Author author) {
-        String sql = "UPDATE author SET name = ?, surname = ?, email = ?, age = ? WHERE id = ?";
+        String sql = "UPDATE author SET name = ?, surname = ?, email = ?, age = ?, pic_name = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, author.getName());
             ps.setString(2, author.getSurname());
             ps.setString(3, author.getEmail());
             ps.setInt(4, author.getAge());
             ps.setInt(5, author.getId());
+            ps.setString(6, author.getImage());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -1,5 +1,6 @@
 package com.example.myLibrary.filter;
 import com.example.myLibrary.model.User;
+import com.example.myLibrary.model.UserType;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -15,7 +16,7 @@ public class UserFilter implements  Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user == null) {
+        if (user == null || user.getUserType() != UserType.ADMIN) {
             response.sendRedirect("/");
         } else {
             filterChain.doFilter(request, response);
