@@ -3,8 +3,11 @@ package com.example.myLibrary.servlet;
 import com.example.myLibrary.constants.SharedConstants;
 import com.example.myLibrary.manager.AuthorManager;
 import com.example.myLibrary.manager.BookManager;
+import com.example.myLibrary.manager.UserManager;
 import com.example.myLibrary.model.Author;
 import com.example.myLibrary.model.Book;
+import com.example.myLibrary.model.User;
+import com.example.myLibrary.model.UserType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,6 +28,7 @@ import java.util.List;
 public class CreateBooks extends HttpServlet {
     private BookManager bookManager = new BookManager();
     private AuthorManager authorManager = new AuthorManager();
+    //private UserManager userManager = new UserManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,3 +60,4 @@ public class CreateBooks extends HttpServlet {
         resp.sendRedirect("/allBooks");
     }
 }
+

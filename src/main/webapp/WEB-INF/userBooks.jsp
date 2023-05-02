@@ -35,8 +35,8 @@ String keyword = request.getParameter("keyword") == null ||
         <th>description</th>
         <th>price</th>
         <th>author name</th>
-        <th>user_id</th>
-        <%if (user.getUserType() == UserType.ADMIN || user.getUserType() == UserType.USER) {%>
+        <th>user name</th>
+        <%if (user.getUserType() == UserType.USER) {%>
         <th>action</th>
         <%}%>
     </tr>
@@ -56,7 +56,8 @@ String keyword = request.getParameter("keyword") == null ||
         <td><%=book.getDescription()%></td>
         <td><%=book.getPrice()%></td>
         <td><%=book.getAuthor().getName()%></td>
-        <th><%=book.getUser().getName()%></th> <%if (user.getUserType() == UserType.ADMIN || user.getUserType() == UserType.USER){%>
+        <td><%=book.getUser().getName()%></td>
+        <%if (user.getUserType() == UserType.USER) {%>
         <td><a href="/removeBook?id=<%=book.getId()%>">Delete</a>
             / <a href="/updateBook?id=<%=book.getId()%>">Update</a> </td>
         <%}%>

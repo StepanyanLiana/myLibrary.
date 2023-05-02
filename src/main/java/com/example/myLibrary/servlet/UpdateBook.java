@@ -1,5 +1,6 @@
 package com.example.myLibrary.servlet;
 
+import com.example.myLibrary.constants.SharedConstants;
 import com.example.myLibrary.manager.AuthorManager;
 import com.example.myLibrary.manager.BookManager;
 import com.example.myLibrary.model.Author;
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.List;
 
@@ -35,12 +37,17 @@ public class UpdateBook extends HttpServlet {
         String description = req.getParameter("description");
         int price = Integer.parseInt(req.getParameter("price"));
         int authorId = Integer.parseInt(req.getParameter("author_id"));
-        String profilePicture = req.getParameter("profilePic");
+        Part profilePic = req.getPart("profilePic");
+        String picName = null;
+        if (profilePic != null && profilePic.getSize() > 0) {
+            picName = System.nanoTime() + "_" + profilePic.getSubmittedFileName();
+            profilePic.write(SharedConstants.UPLOAD_FOLDER + picName);
+        }
         Book book = Book.builder().title(title)
                 .id(id).description(description)
                 .price(price)
                 .author(authorManager.getById(authorId))
-                .PicName(profilePicture)
+                .PicName(picName)
                 .build();
         bookManager.update(book);
         resp.sendRedirect("/allBooks");

@@ -27,6 +27,7 @@
     <option value="<%=book.getAuthor().getId()%>"><%=author.getName()%><%=author.getSurname()%>
             <% }%>
 </select><br>
+    image: <input type="file" name="profilePic" value="<%=book.getPicName()%>">
     <input type="submit" value="update">
 </form>
 </body>
