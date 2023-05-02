@@ -31,11 +31,13 @@ public class BookServlet extends HttpServlet {
                 all = bookManager.getByTitle(keyword);
             }
         }
-        // User byId = userManager.getById(user.getId());
-        //if (user.getUserType() == UserType.USER && byId.equals(user.getId())) {
+       // Book book = new Book();
+       // int userId = book.getUser().getId();
+       // User byId = userManager.getById(user.getId());
+       // if (user.getUserType() == UserType.USER && byId.equals(userId)) {
         // List<Book> byUser = bookManager.getByUser(user);
         // req.setAttribute("books", all);
-        // req.getRequestDispatcher("WEB-INF/userBooks.jsp").forward(req, resp);}
+         //req.getRequestDispatcher("WEB-INF/userBooks.jsp").forward(req, resp);}
         req.setAttribute("books", all);
         req.getRequestDispatcher("WEB-INF/allBooks.jsp").forward(req, resp);
     }
