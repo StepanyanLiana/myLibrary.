@@ -8,13 +8,20 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+  <style>
+    body{
+      background-image: url("../img/dd1303447f451537f2853177b2e4cc3b-700.jpg");
+      background-position: center;
+      background-size: 100% 100%;
+    }
+  </style>
     <title>update author</title>
 </head>
 <body>
 <%Author author = (Author) request.getAttribute("author");%>
 <a href="/allAuthors"> Back </a>
 <h2>Update Author</h2>
-<form action="/updateAuthor" method="post">
+<form action="/updateAuthor" method="post" enctype="multipart/form-data">
   <input name="id" type="hidden" value="<%=author.getId()%>">
   name: <input type="text" name="name" value="<%=author.getName()%>"><br>
   surname: <input type="text" name="surname" value="<%=author.getSurname()%>"> <br>

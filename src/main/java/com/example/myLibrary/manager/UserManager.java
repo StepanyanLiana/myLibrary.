@@ -5,6 +5,8 @@ import com.example.myLibrary.model.User;
 import com.example.myLibrary.model.UserType;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserManager {
     private Connection connection = DBConnectProvider.getInstance().getConnection();
@@ -80,5 +82,19 @@ public class UserManager {
                 .password(resultSet.getString("password"))
                 .userType(UserType.valueOf(resultSet.getString("user_type")))
                 .build();
+    }
+
+    public List<User> getAll() {
+        List<User> userList = new ArrayList<>();
+        String sql = "SELECT * FROM user";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                userList.add(getUserFromResultSet(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
     }
 }

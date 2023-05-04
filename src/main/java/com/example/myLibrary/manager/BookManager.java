@@ -86,7 +86,7 @@ public class BookManager {
                 .description(resultSet.getString("description"))
                 .price(resultSet.getInt("price"))
                  .author(byId)
-                .PicName(resultSet.getString("pic_name"))
+                .picName(resultSet.getString("pic_name"))
                 .user(byUserId)
                 .build();
     }
@@ -99,14 +99,15 @@ public class BookManager {
         }
     }
     public void update(Book book) {
-        String sql = "UPDATE book SET title = ?, description = ?, price = ?, author_id = ?, pic_name = ? WHERE id = ?";
+        String sql = "UPDATE book SET title = ?, description = ?, price = ?, author_id = ?, pic_name = ?, user_id = ? WHERE id = ?";
         try(PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getDescription());
             ps.setInt(3, book.getPrice());
-            ps.setInt(4,book.getAuthor().getId());
-            ps.setInt(5,book.getId());
-            ps.setString(6, book.getPicName());
+            ps.setInt(4, book.getAuthor().getId());
+            ps.setString(5, book.getPicName());
+            ps.setInt(6, book.getUser().getId());
+            ps.setInt(7, book.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

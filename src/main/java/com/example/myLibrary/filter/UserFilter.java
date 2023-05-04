@@ -16,7 +16,7 @@ public class UserFilter implements  Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user == null || user.getUserType() != UserType.ADMIN) {
+        if (user == null || user.getUserType() == UserType.ADMIN) {
             response.sendRedirect("/");
         } else {
             filterChain.doFilter(request, response);

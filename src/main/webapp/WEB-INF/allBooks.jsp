@@ -2,16 +2,17 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.myLibrary.model.Book" %>
 <%@ page import="com.example.myLibrary.model.User" %>
-<%@ page import="com.example.myLibrary.model.UserType" %><%--
-  Created by IntelliJ IDEA.
-  User: Admin
-  Date: 28.04.2023
-  Time: 15:16
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.myLibrary.model.UserType" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <style>
+        body{
+            background-image: url("../img/dd1303447f451537f2853177b2e4cc3b-700.jpg");
+            background-position: center;
+            background-size: 100% 100%;
+        }
+    </style>
     <title>all books</title>
 </head>
 <% List<Book> books = (List<Book>) request.getAttribute("books");
@@ -36,9 +37,7 @@ String keyword = request.getParameter("keyword") == null ||
         <th>price</th>
         <th>author name</th>
         <th>user_id</th>
-        <%if (user.getUserType() == UserType.ADMIN || user.getUserType() == UserType.USER) {%>
         <th>action</th>
-        <%}%>
     </tr>
     <% if(books != null && !books.isEmpty()) {%>
     <% for (Book book : books) { %>
@@ -56,10 +55,9 @@ String keyword = request.getParameter("keyword") == null ||
         <td><%=book.getDescription()%></td>
         <td><%=book.getPrice()%></td>
         <td><%=book.getAuthor().getName()%></td>
-        <th><%=book.getUser().getName()%></th> <%if (user.getUserType() == UserType.ADMIN || user.getUserType() == UserType.USER){%>
+        <td><%=(book.getUser() != null) ? book.getUser().getId() : "" %></td>
         <td><a href="/removeBook?id=<%=book.getId()%>">Delete</a>
             / <a href="/updateBook?id=<%=book.getId()%>">Update</a> </td>
-        <%}%>
     </tr>
     <%}%>
     <%}%>

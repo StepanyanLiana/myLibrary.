@@ -11,6 +11,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+  <style>
+    body{
+      background-image: url("../img/dd1303447f451537f2853177b2e4cc3b-700.jpg");
+      background-position: center;
+      background-size: 100% 100%;
+    }
+  </style>
     <title>all authors</title>
 </head>
 <% List<Author> authors = (List<Author>) request.getAttribute("authors");

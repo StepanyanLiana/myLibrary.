@@ -7,7 +7,6 @@ import com.example.myLibrary.manager.UserManager;
 import com.example.myLibrary.model.Author;
 import com.example.myLibrary.model.Book;
 import com.example.myLibrary.model.User;
-import com.example.myLibrary.model.UserType;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -28,12 +27,14 @@ import java.util.List;
 public class CreateBooks extends HttpServlet {
     private BookManager bookManager = new BookManager();
     private AuthorManager authorManager = new AuthorManager();
-    //private UserManager userManager = new UserManager();
+    private UserManager userManager = new UserManager();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Author> authorList = authorManager.getAll();
         req.setAttribute("authors", authorList);
+        List<User> users = userManager.getAll();
+        req.setAttribute("users", users);
         req.getRequestDispatcher("WEB-INF/createBooks.jsp").forward(req, resp);
     }
 
@@ -49,12 +50,14 @@ public class CreateBooks extends HttpServlet {
             picName = System.nanoTime() + "_" + profilePicPart.getSubmittedFileName();
             profilePicPart.write(SharedConstants.IMAGE_PATH + picName);
         }
+        int userId = Integer.parseInt(req.getParameter("user_id"));
         Book book = Book.builder()
                 .title(title)
                 .description(description)
                 .price(price)
                 .author(authorManager.getById(authorId))
-                .PicName(picName)
+                .picName(picName)
+                .user(userManager.getById(userId))
                 .build();
         bookManager.save(book);
         resp.sendRedirect("/allBooks");

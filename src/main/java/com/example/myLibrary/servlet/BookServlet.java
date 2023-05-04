@@ -22,23 +22,18 @@ public class BookServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
-        String keyword = req.getParameter("keyword");
-        List<Book> all = null;
-        if (user.getUserType() == UserType.ADMIN || user.getUserType() == UserType.USER) {
+        List<Book> result = null;
+        if (user != null && user.getUserType() == UserType.ADMIN) {
+            String keyword = req.getParameter("keyword");
             if (keyword == null || keyword.equals("")) {
-                all = bookManager.getAll();
+                result = bookManager.getAll();
             } else {
-                all = bookManager.getByTitle(keyword);
+                result = bookManager.getByTitle(keyword);
             }
+        } else if (user != null && user.getUserType() == UserType.USER) {
+            result = bookManager.getByUser(user);
+            }
+            req.setAttribute("books", result);
+            req.getRequestDispatcher("WEB-INF/allBooks.jsp").forward(req, resp);
         }
-       // Book book = new Book();
-       // int userId = book.getUser().getId();
-       // User byId = userManager.getById(user.getId());
-       // if (user.getUserType() == UserType.USER && byId.equals(userId)) {
-        // List<Book> byUser = bookManager.getByUser(user);
-        // req.setAttribute("books", all);
-         //req.getRequestDispatcher("WEB-INF/userBooks.jsp").forward(req, resp);}
-        req.setAttribute("books", all);
-        req.getRequestDispatcher("WEB-INF/allBooks.jsp").forward(req, resp);
     }
-}

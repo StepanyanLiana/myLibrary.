@@ -5,6 +5,7 @@ import com.example.myLibrary.manager.AuthorManager;
 import com.example.myLibrary.model.Author;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,11 @@ import java.io.File;
 import java.io.IOException;
 
 @WebServlet("/updateAuthor")
+@MultipartConfig(
+        maxFileSize = 1024 * 1024 * 5 ,//5mb
+        maxRequestSize = 1024 * 1024 * 10,
+        fileSizeThreshold = 1024 * 1024 * 1
+)
 public class UpdateAuthor extends HttpServlet {
     private AuthorManager authorManager = new AuthorManager();
     @Override

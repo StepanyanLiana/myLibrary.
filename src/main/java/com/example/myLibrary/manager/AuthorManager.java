@@ -86,8 +86,8 @@ public class AuthorManager {
             ps.setString(2, author.getSurname());
             ps.setString(3, author.getEmail());
             ps.setInt(4, author.getAge());
-            ps.setInt(5, author.getId());
-            ps.setString(6, author.getImage());
+            ps.setString(5, author.getImage());
+            ps.setInt(6, author.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
